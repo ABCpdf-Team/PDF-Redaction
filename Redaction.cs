@@ -1,8 +1,9 @@
 ﻿// ===========================================================================
-//	©2013-2021 WebSupergoo. All rights reserved.
+//	©2013-2024 WebSupergoo. All rights reserved.
 //
-//	This source code is for use exclusively with the ABCpdf product under
-//	the terms of the license for that product. Details can be found at
+//	This source code is for use exclusively with the ABCpdf product with
+//	which it is distributed, under the terms of the license for that
+//	product. Details can be found at
 //
 //		http://www.websupergoo.com/
 //
@@ -21,10 +22,10 @@ using System.IO;
 using System.Text;
 using System.Diagnostics;
 
-using WebSupergoo.ABCpdf12;
-using WebSupergoo.ABCpdf12.Objects;
-using WebSupergoo.ABCpdf12.Atoms;
-using WebSupergoo.ABCpdf12.Operations;
+using WebSupergoo.ABCpdf13;
+using WebSupergoo.ABCpdf13.Objects;
+using WebSupergoo.ABCpdf13.Atoms;
+using WebSupergoo.ABCpdf13.Operations;
 
 
 namespace Redaction {
@@ -177,27 +178,28 @@ namespace Redaction {
 			public ArrayAtom GetTextOperator() {
 				Debug.Assert(_text != null);
 				// get data and widths
-				byte[] section = new byte[_text.StreamLength];
+				var section = new byte[_text.StreamLength];
 				Array.Copy(_data, _text.StreamOffset, section, 0, _text.StreamLength);
-				IDictionary<char, int> widths = _text.Font.Widths;
+				var widths = _text.Font.Widths;
+				var defaultWidth = _text.Font.DefaultWidth;
 				// convert to atoms
-				ArrayAtom textOp = ArrayAtom.FromContentStream(section);
+				var textOp = ArrayAtom.FromContentStream(section);
 				string srcOp = ((OpAtom)textOp[1]).Text;
 				int numParams = srcOp == "\"" ? 4 : 2;
 				Debug.Assert(textOp.Count == numParams);
-				ArrayAtom srcParams = textOp[numParams == 4 ? 2 : 0] as ArrayAtom;
+				var srcParams = textOp[numParams == 4 ? 2 : 0] as ArrayAtom;
 				if (srcParams == null) {
 					Debug.Assert(srcOp != "TJ");
 					srcParams = new ArrayAtom();
 					srcParams.Add(textOp[0]);
 				}
-				ArrayAtom dstParams = new ArrayAtom();
+				var dstParams = new ArrayAtom();
 				// copy items
 				int textSpanIndex = 0;
 				for (int i = 0; i < srcParams.Count; i++) {
-					Atom item = srcParams[i];
+					var item = srcParams[i];
 					if (item is StringAtom) {
-						StringAtom str = (StringAtom)item;
+						var str = (StringAtom)item;
 						Tuple<string, bool[]> redaction = null;
 						_redactions.TryGetValue(textSpanIndex++, out redaction);
 						if (redaction == null) {
@@ -217,8 +219,11 @@ namespace Redaction {
 								for (p2 = p1; p2 < redacted.Length; p2++) {
 									if (hidden != redacted[p2])
 										break;
-									if (hidden)
-										width1000ths += widths[whole[p2]];
+									if (hidden) {
+										if (!widths.TryGetValue(whole[p2], out var width))
+											width = defaultWidth; 
+										width1000ths += width;
+									}
 								}
 								if (hidden) {
 									dstParams.Add(new NumAtom(-width1000ths));
@@ -241,7 +246,7 @@ namespace Redaction {
 					}
 				}
 				// make new operators
-				ArrayAtom newTextOp = new ArrayAtom();
+				var newTextOp = new ArrayAtom();
 				if (srcOp == "\'") {
 					newTextOp.Add(new OpAtom("T*"));
 				}

@@ -1,8 +1,9 @@
-// ===========================================================================
-//	�2013-2021 WebSupergoo. All rights reserved.
+﻿// ===========================================================================
+//	©2013-2024 WebSupergoo. All rights reserved.
 //
-//	This source code is for use exclusively with the ABCpdf product under
-//	the terms of the license for that product. Details can be found at
+//	This source code is for use exclusively with the ABCpdf product with
+//	which it is distributed, under the terms of the license for that
+//	product. Details can be found at
 //
 //		http://www.websupergoo.com/
 //
@@ -22,10 +23,10 @@ using System.Text;
 using System.Diagnostics;
 using System.Reflection;
 
-using WebSupergoo.ABCpdf12;
-using WebSupergoo.ABCpdf12.Objects;
-using WebSupergoo.ABCpdf12.Atoms;
-using WebSupergoo.ABCpdf12.Operations;
+using WebSupergoo.ABCpdf13;
+using WebSupergoo.ABCpdf13.Objects;
+using WebSupergoo.ABCpdf13.Atoms;
+using WebSupergoo.ABCpdf13.Operations;
 
 namespace Redaction
 {
@@ -49,6 +50,8 @@ namespace Redaction
 		private Label label2;
 		private TextBox textBoxFont;
 		private Button button3;
+		private Button button6;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -99,6 +102,7 @@ namespace Redaction
 			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxFont = new System.Windows.Forms.TextBox();
 			this.button3 = new System.Windows.Forms.Button();
+			this.button6 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -108,9 +112,9 @@ namespace Redaction
 			// button1
 			// 
 			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button1.Location = new System.Drawing.Point(643, 336);
+			this.button1.Location = new System.Drawing.Point(517, 491);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(202, 23);
+			this.button1.Size = new System.Drawing.Size(323, 34);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Redact Text Area";
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -118,9 +122,9 @@ namespace Redaction
 			// button2
 			// 
 			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button2.Location = new System.Drawing.Point(643, 365);
+			this.button2.Location = new System.Drawing.Point(517, 533);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(201, 23);
+			this.button2.Size = new System.Drawing.Size(321, 34);
 			this.button2.TabIndex = 1;
 			this.button2.Text = "Redact Text Words";
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -128,9 +132,9 @@ namespace Redaction
 			// button4
 			// 
 			this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button4.Location = new System.Drawing.Point(642, 394);
+			this.button4.Location = new System.Drawing.Point(515, 576);
 			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(201, 23);
+			this.button4.Size = new System.Drawing.Size(322, 33);
 			this.button4.TabIndex = 3;
 			this.button4.Text = "Redact Text Fonts";
 			this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -138,9 +142,9 @@ namespace Redaction
 			// button5
 			// 
 			this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button5.Location = new System.Drawing.Point(641, 423);
+			this.button5.Location = new System.Drawing.Point(514, 618);
 			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(202, 23);
+			this.button5.Size = new System.Drawing.Size(323, 34);
 			this.button5.TabIndex = 4;
 			this.button5.Text = "Redact Image Area";
 			this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -151,9 +155,9 @@ namespace Redaction
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pictureBox1.Location = new System.Drawing.Point(15, 13);
+			this.pictureBox1.Location = new System.Drawing.Point(24, 19);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(620, 865);
+			this.pictureBox1.Size = new System.Drawing.Size(480, 853);
 			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBox1.TabIndex = 5;
 			this.pictureBox1.TabStop = false;
@@ -164,9 +168,9 @@ namespace Redaction
 			this.groupBox1.Controls.Add(this.textBoxFind);
 			this.groupBox1.Controls.Add(this.radioButtonFine);
 			this.groupBox1.Controls.Add(this.radioButtonCoarse);
-			this.groupBox1.Location = new System.Drawing.Point(641, 12);
+			this.groupBox1.Location = new System.Drawing.Point(514, 18);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(201, 184);
+			this.groupBox1.Size = new System.Drawing.Size(321, 268);
 			this.groupBox1.TabIndex = 10;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Text Selection - Marked in Blue";
@@ -174,11 +178,11 @@ namespace Redaction
 			// textBoxFind
 			// 
 			this.textBoxFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxFind.Location = new System.Drawing.Point(16, 66);
+			this.textBoxFind.Location = new System.Drawing.Point(26, 96);
 			this.textBoxFind.Multiline = true;
 			this.textBoxFind.Name = "textBoxFind";
 			this.textBoxFind.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBoxFind.Size = new System.Drawing.Size(172, 101);
+			this.textBoxFind.Size = new System.Drawing.Size(275, 148);
 			this.textBoxFind.TabIndex = 12;
 			this.textBoxFind.Text = "plant\r\nflower";
 			this.textBoxFind.TextChanged += new System.EventHandler(this.textBoxFind_TextChanged);
@@ -188,9 +192,9 @@ namespace Redaction
 			this.radioButtonFine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.radioButtonFine.AutoSize = true;
 			this.radioButtonFine.Checked = true;
-			this.radioButtonFine.Location = new System.Drawing.Point(15, 19);
+			this.radioButtonFine.Location = new System.Drawing.Point(34, 28);
 			this.radioButtonFine.Name = "radioButtonFine";
-			this.radioButtonFine.Size = new System.Drawing.Size(85, 17);
+			this.radioButtonFine.Size = new System.Drawing.Size(126, 24);
 			this.radioButtonFine.TabIndex = 11;
 			this.radioButtonFine.TabStop = true;
 			this.radioButtonFine.Text = "Fine Grained";
@@ -200,9 +204,9 @@ namespace Redaction
 			// 
 			this.radioButtonCoarse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.radioButtonCoarse.AutoSize = true;
-			this.radioButtonCoarse.Location = new System.Drawing.Point(15, 43);
+			this.radioButtonCoarse.Location = new System.Drawing.Point(35, 63);
 			this.radioButtonCoarse.Name = "radioButtonCoarse";
-			this.radioButtonCoarse.Size = new System.Drawing.Size(98, 17);
+			this.radioButtonCoarse.Size = new System.Drawing.Size(146, 24);
 			this.radioButtonCoarse.TabIndex = 10;
 			this.radioButtonCoarse.Text = "Coarse Grained";
 			this.radioButtonCoarse.UseVisualStyleBackColor = true;
@@ -212,9 +216,9 @@ namespace Redaction
 			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox2.Controls.Add(this.label1);
 			this.groupBox2.Controls.Add(this.textBoxRect);
-			this.groupBox2.Location = new System.Drawing.Point(641, 202);
+			this.groupBox2.Location = new System.Drawing.Point(514, 295);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(200, 61);
+			this.groupBox2.Size = new System.Drawing.Size(320, 89);
 			this.groupBox2.TabIndex = 12;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Area Selection - Marked in Green";
@@ -223,18 +227,18 @@ namespace Redaction
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(13, 25);
+			this.label1.Location = new System.Drawing.Point(21, 37);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(30, 13);
+			this.label1.Size = new System.Drawing.Size(43, 20);
 			this.label1.TabIndex = 16;
 			this.label1.Text = "Rect";
 			// 
 			// textBoxRect
 			// 
 			this.textBoxRect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxRect.Location = new System.Drawing.Point(49, 22);
+			this.textBoxRect.Location = new System.Drawing.Point(78, 32);
 			this.textBoxRect.Name = "textBoxRect";
-			this.textBoxRect.Size = new System.Drawing.Size(139, 20);
+			this.textBoxRect.Size = new System.Drawing.Size(223, 26);
 			this.textBoxRect.TabIndex = 15;
 			this.textBoxRect.Text = "5 5 400 80";
 			this.textBoxRect.TextChanged += new System.EventHandler(this.textBoxRect_TextChanged);
@@ -244,9 +248,9 @@ namespace Redaction
 			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox3.Controls.Add(this.label2);
 			this.groupBox3.Controls.Add(this.textBoxFont);
-			this.groupBox3.Location = new System.Drawing.Point(643, 269);
+			this.groupBox3.Location = new System.Drawing.Point(517, 393);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(200, 61);
+			this.groupBox3.Size = new System.Drawing.Size(320, 89);
 			this.groupBox3.TabIndex = 17;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Font Selection - Marked in Red";
@@ -255,18 +259,18 @@ namespace Redaction
 			// 
 			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(12, 25);
+			this.label2.Location = new System.Drawing.Point(19, 37);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(35, 13);
+			this.label2.Size = new System.Drawing.Size(51, 20);
 			this.label2.TabIndex = 16;
 			this.label2.Text = "Name";
 			// 
 			// textBoxFont
 			// 
 			this.textBoxFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxFont.Location = new System.Drawing.Point(49, 22);
+			this.textBoxFont.Location = new System.Drawing.Point(78, 32);
 			this.textBoxFont.Name = "textBoxFont";
-			this.textBoxFont.Size = new System.Drawing.Size(139, 20);
+			this.textBoxFont.Size = new System.Drawing.Size(223, 26);
 			this.textBoxFont.TabIndex = 15;
 			this.textBoxFont.Text = "Helvetica-Bold";
 			this.textBoxFont.TextChanged += new System.EventHandler(this.textBoxFont_TextChanged);
@@ -274,17 +278,28 @@ namespace Redaction
 			// button3
 			// 
 			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button3.Location = new System.Drawing.Point(641, 475);
+			this.button3.Location = new System.Drawing.Point(517, 728);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(202, 23);
+			this.button3.Size = new System.Drawing.Size(323, 34);
 			this.button3.TabIndex = 18;
 			this.button3.Text = "Reload Document";
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
+			// button6
+			// 
+			this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.button6.Location = new System.Drawing.Point(517, 661);
+			this.button6.Name = "button6";
+			this.button6.Size = new System.Drawing.Size(321, 34);
+			this.button6.TabIndex = 19;
+			this.button6.Text = "ReplaceText Words";
+			this.button6.Click += new System.EventHandler(this.button6_Click);
+			// 
 			// Form1
 			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
 			this.ClientSize = new System.Drawing.Size(854, 890);
+			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
@@ -377,14 +392,12 @@ namespace Redaction
 			// here we search for some text on the page and then redact it
 			using (Doc doc = new Doc()) {
 				doc.Read(_src);
-				using (XRect rect = doc.Rect) {
-					List<TextFragment> fragments = FindText(doc);
-					if (radioButtonCoarse.Checked)
-						SimpleRedaction.RedactTextOps(doc, fragments);
-					else
-						FineRedaction.RedactCharacters(doc, fragments);
-					doc.Flatten();
-				}
+				List<TextFragment> fragments = FindText(doc);
+				if (radioButtonCoarse.Checked)
+					SimpleRedaction.RedactTextOps(doc, fragments);
+				else
+					FineRedaction.RedactCharacters(doc, fragments);
+				doc.Flatten();
 				string dst = Path.Combine(Directory.GetParent(_src).FullName, "_" + Path.GetRandomFileName() + ".pdf");
 				doc.Save(dst);
 				_src = dst;
@@ -515,6 +528,62 @@ namespace Redaction
 				}
 			}
 			return fragments;
+		}
+
+		private void button6_Click(object sender, EventArgs e) {
+			// here we search for some text on the page and then replace it
+			string find = textBoxFind.Lines.Length > 0 ? textBoxFind.Lines[0] : "";
+			string replace = textBoxFind.Lines.Length > 1 ? textBoxFind.Lines[1] : "";
+			if (find.Length == 0)
+				return;
+			using (Doc doc = new Doc()) {
+				doc.Read(_src);
+				var op = new TextOperation(doc);
+				op.PageContents.IncludeColor = true;
+				op.PageContents.AddPages(1); // hardwired to page one for these examples
+				string text = op.GetText();
+				var pos = text.IndexOf(find, 0);
+				if (pos < 0)
+					return; // nothing found
+				var fragments = op.Select(pos, find.Length);
+				Debug.Assert(fragments.Count > 0);
+				if (radioButtonCoarse.Checked)
+					SimpleRedaction.RedactTextOps(doc, fragments);
+				else
+					FineRedaction.RedactCharacters(doc, fragments);
+				if (!string.IsNullOrEmpty(replace)) {
+					XRect rect = new XRect();
+					foreach (var fragment in fragments)
+						rect.Union(fragment.Rect);
+					var first = fragments[0];
+					if (FontSupportsText(first.Font, replace))
+						doc.Font = first.Font.ID;
+					else {
+						doc.Font = doc.EmbedFont(first.Font.BaseFont, LanguageType.Unicode);
+						var font = (FontObject)doc.ObjectSoup[doc.Font];
+						if (FontSupportsText(first.Font, replace) == false)
+							throw new Exception("Text contains glyphs which do not exist in font.");
+					}
+					doc.TextStyle.Size = first.FontSize;
+					doc.ColorSpace = first.FontColorSpace != null ? first.FontColorSpace.ID : 0;
+					doc.Color.String = first.FontColor.String;
+					doc.Rect.String = rect.String;
+					doc.AddText(replace);
+				}
+				doc.Flatten();
+				string dst = Path.Combine(Directory.GetParent(_src).FullName, "_" + Path.GetRandomFileName() + ".pdf");
+				doc.Save(dst);
+				_src = dst;
+				UpdateDoc();
+			}
+		}
+
+		private static bool FontSupportsText(FontObject font, string replace) {
+			var chars = font.CharToEncoding;
+			foreach (var c in replace)
+				if (!chars.ContainsKey(c))
+					return false;
+			return true;
 		}
 	}
 }
